@@ -6,7 +6,7 @@ export class PostController {
     constructor(private readonly postService: PostService) {}
 
     @Get()
-    getAllPost(@Query() { } : {}) {
+    getAllPost(@Query() { }:{}) {
     }
 
     @Get()
