@@ -38,6 +38,15 @@ export class BaseRepository<T extends Document>{
 
 
     //
+    async findOneByCondition(
+        filter,
+        field?: any | null,
+        option?: any | null,
+        populate?: any | null,
+    ): Promise<T>{
+        return this.model.findOne(filter, field, option);
+    }
+
     async getByCondition(
         filter: any,
         field?: any | null,
@@ -45,5 +54,9 @@ export class BaseRepository<T extends Document>{
         populate?: any | null,
     ): Promise<T[]> {
         return this.model.find(filter, field, option).populate(populate);
+    }
+
+    async findByConditionAndUpdate(filter, update) {
+        return this.model.findOneAndUpdate(filter as FilterQuery<T>, update);
     }
 }
