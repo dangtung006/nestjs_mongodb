@@ -1,5 +1,6 @@
-import { Controller, Get, Query, Param, Body, Req, Put, Post, Delete } from '@nestjs/common';
+import { Controller, Get, Query, Param, Body, Req, Put, Post, Delete, UseGuards } from '@nestjs/common';
 import { PostService } from './post.service';
+import { JwtAuthGuard } from '../common/guard/jwt-auth.guard'
 
 import {
     CreatePostDto,
@@ -13,8 +14,10 @@ export class PostController {
         private readonly postService: PostService,
     ) {}
 
+    @UseGuards(JwtAuthGuard)
     @Get()
-    async getPostList(@Query() { page, limit, start }: PaginationPostDto) {
+    async getPostList(@Req() req: any, @Query() { page, limit, start }: PaginationPostDto) {
+        console.log(req);
         return this.postService.getPostList( page, limit, start);
     }
 

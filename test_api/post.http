@@ -20,6 +20,7 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/post?page=1&limit=5&start=0
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRhbmd0dW5nQGdtYWlsLmNvbSIsImlzU2Vjb25kRmFjdG9yQXV0aGVudGljYXRlZCI6ZmFsc2UsImlhdCI6MTY3NTI1NzcxNSwiZXhwIjoxNjc1MjU3NzE1fQ.6PUGJPBA6BfAzwuj2z3EE9SVFGSMZgj4HZkBj5GcN_Y
 
 ###
 GET http://localhost:3000/post/63da1d44d97afd38fee17c2e

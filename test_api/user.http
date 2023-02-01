@@ -15,3 +15,7 @@ Content-Type: application/json
     "email"        : "dangtung@gmail.com",
     "password"     : "123456"
 }
+
+###
+GET http://localhost:3000/auth/test
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRhbmd0dW5nQGdtYWlsLmNvbSIsImlzU2Vjb25kRmFjdG9yQXV0aGVudGljYXRlZCI6ZmFsc2UsImlhdCI6MTY3NTI1OTQwMSwiZXhwIjoxNjc1MjU5NDAxfQ.YzPolTVCf1-ugONhBnPrX61UmPZYVOyFXShC1RsCiUY
