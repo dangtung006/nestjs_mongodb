@@ -26,4 +26,4 @@ export interface Post extends Document {
     // tags: [string];
     // numbers: [number];
     // categories: [Category];
-  }
+}

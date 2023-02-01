@@ -11,11 +11,11 @@ export class BaseRepository<T extends Document>{
         return this.model.find()
     }
 
-    async create(doc: T): Promise<any>{
+    async create(doc): Promise<any>{
         const newDoc = new this.model(doc);
         return await newDoc.save();
     }
-    
+
     async findByIdAndUpdate(id , update){
         return this.model.findOneAndUpdate(id, update)
     }
