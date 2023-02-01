@@ -22,7 +22,7 @@ export class PostController {
         return this.postService.getPostById(id);
     }
 
-    @Post()
+    @Post("create")
     async createPost(@Req() req: any, @Body() post : CreatePostDto) {
         return this.postService.createPost(post);
     }
