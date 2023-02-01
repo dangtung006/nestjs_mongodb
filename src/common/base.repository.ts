@@ -35,4 +35,15 @@ export class BaseRepository<T extends Document>{
     async deleteByCondition(filter : any) {
         return this.model.deleteMany(filter);
     }
+
+
+    //
+    async getByCondition(
+        filter: any,
+        field?: any | null,
+        option?: any | null,
+        populate?: any | null,
+    ): Promise<T[]> {
+        return this.model.find(filter, field, option).populate(populate);
+    }
 }

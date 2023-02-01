@@ -10,11 +10,14 @@ export class CreatePostDto {
 }
 
 export class UpdatePostDto {
-  @IsNotEmpty()
-  id: number;
+//   @IsNotEmpty()
+//   id: number;
   content: string;
+  
   @IsNotEmpty()
   title: string;
+
+  description : string
 }
 
 export class PaginationPostDto {

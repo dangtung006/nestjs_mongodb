@@ -6,3 +6,23 @@ Content-Type: application/json
     "description"  : "bbbbbb",
     "content"      : "cccc"
 }
+
+###
+PUT http://localhost:3000/post/63da1d44d97afd38fee17c2e
+Content-Type: application/json
+
+{
+    "id"           : 1,
+    "title"        : "11111",
+    "description"  : "2222",
+    "content"      : "3333"
+}
+
+###
+GET http://localhost:3000/post?page=1&limit=5&start=0
+
+###
+GET http://localhost:3000/post/63da1d44d97afd38fee17c2e
+
+###
+DELETE  http://localhost:3000/post/63da1d44d97afd38fee17c2e

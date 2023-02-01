@@ -1,5 +1,7 @@
-import { Controller, Get, Query, Param, Body, Req, Put, Post } from '@nestjs/common';
+import { Controller, Get, Query, Param, Body, Req, Put, Post, Delete } from '@nestjs/common';
 import { PostService } from './post.service';
+import { PostRepository } from './post.repository';
+
 
 import {
     CreatePostDto,
@@ -10,11 +12,12 @@ import {
 @Controller('post')
 export class PostController {
     constructor(
-        private readonly postService: PostService
+        private readonly postService: PostService,
     ) {}
 
     @Get()
-    getAllPost(@Query() { }:{}) {
+    async getPostList(@Query() { page, limit, start }: PaginationPostDto) {
+        return this.postService.getPostList( page, limit, start);
     }
 
     @Get(':id')
@@ -28,6 +31,13 @@ export class PostController {
     }
 
     @Put(':id')
-    async replacePost(@Param('id') id: string, @Body() post: {} ) {
+    async replacePost(@Param('id') id: string, @Body() post: UpdatePostDto) {
+        return this.postService.replacePost(id, post);
+    }
+
+    @Delete(':id')
+    async deletePost(@Param('id') id: string) {
+        await this.postService.deletePost(id);
+        return 1;
     }
 }
