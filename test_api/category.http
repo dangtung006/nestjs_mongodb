@@ -1,0 +1,10 @@
+POST http://localhost:3000/category/create
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRhbmd0dW5nQGdtYWlsLmNvbSIsImlzU2Vjb25kRmFjdG9yQXV0aGVudGljYXRlZCI6ZmFsc2UsImlhdCI6MTY3NTMxMjgyMH0.Rwp5eNlbgiC0fjS1nD4Rihog2b5nrUgfQZ1a9wtyvRM
+Content-Type: application/json
+
+{
+    "title"        : "sports"
+}
+
+###
+GET http://localhost:3000/category
