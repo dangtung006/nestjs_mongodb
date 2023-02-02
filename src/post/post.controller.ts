@@ -39,6 +39,16 @@ export class PostController {
         return post;
     }
 
+    @Get('get/category')
+    async getByCategory(@Query('category_id') category_id) {
+        return await this.postService.getByCategory(category_id);
+    }
+  
+    @Get('get/categories')
+    async getByCategories(@Query('category_ids') category_ids) {
+        return await this.postService.getByCategories(category_ids);
+    }
+
     @UseGuards(AuthGuard('jwt'))
     @Post("create")
     async createPost(@Req() req: any, @Body() post : CreatePostDto) {

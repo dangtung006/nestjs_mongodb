@@ -53,6 +53,22 @@ export class PostService {
         return post;
     }
 
+    async getByCategory(category_id: string) {
+        return await this.postRepository.getByCondition({
+            categories: {
+                $elemMatch: { $eq: category_id },
+            },
+        });
+    }
+    
+    async getByCategories(category_ids: [string]) {
+        return await this.postRepository.getByCondition({
+            categories: {
+                $all: category_ids,
+            },
+        });
+    }
+
     async createPost(user : any, post: CreatePostDto) {
         post = { ...post, user : user._id};
         const new_post = await this.postRepository.create(post);
