@@ -6,36 +6,38 @@ import {
     Delete,
     Req,
     Query,
-    Param
+    Param,
+    Body
 } 
-
 from '@nestjs/common';
+
+import { CreateCategoryDto } from './category.dto';
 
 @Controller('category')
 export class CategoryController {
    
     @Get()
-    async getPostList(@Req() req: any) {
+    async getCateList(@Req() req: any) {
         
     }
 
     @Get(':id')
-    async getPostById(@Param('id') id: string) {
+    async getCateById(@Param('id') id: string) {
      
     }
 
     
     @Post("create")
-    async createPost(@Req() req: any) {
-      
+    async createCate(@Req() req: any, @Body() category : CreateCategoryDto) {
+        
     }
 
     @Put(':id')
-    async replacePost(@Param('id') id: string) {
+    async replaceCate(@Param('id') id: string) {
         
     }
 
     @Delete(':id')
-    async deletePost(@Param('id') id: string) {
+    async deleteCate(@Param('id') id: string) {
     }
 }
