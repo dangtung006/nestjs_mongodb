@@ -30,7 +30,6 @@ export class PostController {
     @UseGuards(AuthGuard('jwt'))
     @Get()
     async getPostList(@Req() req: any, @Query() { page, limit, start }: PaginationPostDto) {
-        console.log(req.user);
         return this.postService.getPostList( page, limit, start);
     }
 
