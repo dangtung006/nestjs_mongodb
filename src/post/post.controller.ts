@@ -1,6 +1,19 @@
-import { Controller, Get, Query, Param, Body, Req, Put, Post, Delete, UseGuards } from '@nestjs/common';
+import { 
+    Controller, 
+    Get, 
+    Query, 
+    Param, 
+    Body, 
+    Req, 
+    Put, 
+    Post, 
+    Delete, 
+    UseGuards ,
+    NotFoundException
+} from '@nestjs/common';
+
 import { PostService } from './post.service';
-import { JwtAuthGuard } from '../common/guard/jwt-auth.guard'
+import { AuthGuard } from '@nestjs/passport';
 
 import {
     CreatePostDto,
@@ -14,21 +27,25 @@ export class PostController {
         private readonly postService: PostService,
     ) {}
 
-    @UseGuards(JwtAuthGuard)
+    @UseGuards(AuthGuard('jwt'))
     @Get()
     async getPostList(@Req() req: any, @Query() { page, limit, start }: PaginationPostDto) {
-        console.log(req);
+        console.log(req.user);
         return this.postService.getPostList( page, limit, start);
     }
 
     @Get(':id')
-    getPostById(@Param('id') id: string) {
-        return this.postService.getPostById(id);
+    async getPostById(@Param('id') id: string) {
+        const post = await this.postService.getPostById(id);
+        await post.populate('user');
+        return post;
     }
 
+    @UseGuards(AuthGuard('jwt'))
     @Post("create")
     async createPost(@Req() req: any, @Body() post : CreatePostDto) {
-        return this.postService.createPost(post);
+        const user = req.user;
+        return this.postService.createPost(user , post);
     }
 
     @Put(':id')

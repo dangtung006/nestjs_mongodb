@@ -5,6 +5,11 @@ const PostSchema = new Schema(
         title: String,
         description: String,
         content: String,
+        
+        user : {
+            type : Schema.Types.ObjectId,
+            ref : 'User'
+        }
     },
     {
         timestamps: true,

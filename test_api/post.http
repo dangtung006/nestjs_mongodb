@@ -1,10 +1,12 @@
 POST http://localhost:3000/post/create
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRhbmd0dW5nQGdtYWlsLmNvbSIsImlzU2Vjb25kRmFjdG9yQXV0aGVudGljYXRlZCI6ZmFsc2UsImlhdCI6MTY3NTMxMjgyMH0.Rwp5eNlbgiC0fjS1nD4Rihog2b5nrUgfQZ1a9wtyvRM
 Content-Type: application/json
 
 {
     "title"        : "aaaaaa",
     "description"  : "bbbbbb",
-    "content"      : "cccc"
+    "content"      : "cccc",
+    "user"         : "63da5efd41247126845737ba"
 }
 
 ###
@@ -20,10 +22,10 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/post?page=1&limit=5&start=0
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRhbmd0dW5nQGdtYWlsLmNvbSIsImlzU2Vjb25kRmFjdG9yQXV0aGVudGljYXRlZCI6ZmFsc2UsImlhdCI6MTY3NTI1NzcxNSwiZXhwIjoxNjc1MjU3NzE1fQ.6PUGJPBA6BfAzwuj2z3EE9SVFGSMZgj4HZkBj5GcN_Y
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRhbmd0dW5nQGdtYWlsLmNvbSIsImlzU2Vjb25kRmFjdG9yQXV0aGVudGljYXRlZCI6ZmFsc2UsImlhdCI6MTY3NTMxMjYwNn0.lJ8UlXMb-P4OkyrA8T556KGTzx-9oofUqCmBPDvso2M
 
 ###
-GET http://localhost:3000/post/63da1d44d97afd38fee17c2e
+GET http://localhost:3000/post/63db3f39846026c425270cbe
 
 ###
 DELETE  http://localhost:3000/post/63da1d44d97afd38fee17c2e

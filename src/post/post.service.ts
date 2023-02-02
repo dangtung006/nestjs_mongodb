@@ -35,11 +35,12 @@ export class PostService {
     }
 
     async getPostById(post_id: string){
-        const post = await this.postRepository.findById(post_id);
-        return post;
+        return await this.postRepository.findById(post_id);
     }
 
-    async createPost( post: CreatePostDto) {
+    async createPost(user : any, post: CreatePostDto) {
+        post = { ...post, user : user._id};
+        console.log("post : " , post);
         const new_post = await this.postRepository.create(post);
         return new_post;
     }
