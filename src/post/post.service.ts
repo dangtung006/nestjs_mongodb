@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException} from '@nestjs/common';
 import { CreatePostDto, UpdatePostDto } from './dto/post.dto';
 import { PostRepository } from './post.repository';
 import { CategoryRepository} from '../category/category.repository'
@@ -37,12 +37,24 @@ export class PostService {
     }
 
     async getPostById(post_id: string){
-        return await this.postRepository.findById(post_id);
+        const post = await this.postRepository.findById(post_id);
+        if(!post) 
+            throw new NotFoundException(post_id);
+
+        await post.populate([
+            { path: 'user', select: 'name email' },
+            {
+                path: 'categories',
+                select: 'title',
+                options: { limit: 100, sort: { name: 1 } },
+            },
+        ]);
+
+        return post;
     }
 
     async createPost(user : any, post: CreatePostDto) {
         post = { ...post, user : user._id};
-        console.log("post : " , post);
         const new_post = await this.postRepository.create(post);
 
         if(post.categories) {
@@ -57,7 +69,7 @@ export class PostService {
                 },
             )
         }
-        
+
         return new_post;
     }
 
