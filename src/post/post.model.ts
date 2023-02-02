@@ -9,7 +9,9 @@ const PostSchema = new Schema(
         user : {
             type : Schema.Types.ObjectId,
             ref : 'User'
-        }
+        },
+
+        categories: [{ type: Schema.Types.ObjectId, ref: 'Category' }],
     },
     {
         timestamps: true,

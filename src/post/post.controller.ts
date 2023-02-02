@@ -36,6 +36,10 @@ export class PostController {
     @Get(':id')
     async getPostById(@Param('id') id: string) {
         const post = await this.postService.getPostById(id);
+        
+        if(!post) 
+            throw new NotFoundException(id);
+
         await post.populate('user');
         return post;
     }
