@@ -6,7 +6,7 @@ export class CreatePostDto {
   description: string;
   content: string;
   user: string;
-//   categories: [string];
+  categories: [string];
 }
 
 export class UpdatePostDto {

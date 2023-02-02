@@ -5,6 +5,8 @@ import { PostController } from './post.controller';
 import { PostService } from './post.service';
 import { PostSchema } from './post.model';
 import { PostRepository } from './post.repository';
+import { CategoryRepository } from '../category/category.repository';
+import { CategorySchema } from '../category/category.model';
 
 @Module({
     imports: [
@@ -13,6 +15,11 @@ import { PostRepository } from './post.repository';
                 name: 'Post',
                 schema: PostSchema,
             },
+
+            {
+                name: 'Category',
+                schema: CategorySchema,
+            },
         ])
     ],
 
@@ -20,7 +27,8 @@ import { PostRepository } from './post.repository';
     
     providers: [
         PostService, 
-        PostRepository
+        PostRepository,
+        CategoryRepository
     ],
 })
 export class PostModule {}

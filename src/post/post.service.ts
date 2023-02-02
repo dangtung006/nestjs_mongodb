@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePostDto, UpdatePostDto } from './dto/post.dto';
 import { PostRepository } from './post.repository';
+import { CategoryRepository} from '../category/category.repository'
 import { isValidObjectId } from 'mongoose';
 
 @Injectable()
 export class PostService {
     constructor(
-        private readonly postRepository: PostRepository
+        private readonly postRepository: PostRepository,
+        private readonly categoryRepository: CategoryRepository,
     ){}
 
     async getPostList(page: number, limit: number, start: string) {
@@ -42,6 +44,20 @@ export class PostService {
         post = { ...post, user : user._id};
         console.log("post : " , post);
         const new_post = await this.postRepository.create(post);
+
+        if(post.categories) {
+            this.categoryRepository.updateMany(
+                {
+                    _id :  { $in: post.categories }
+                },
+                {
+                    $push: {
+                        posts: new_post._id,
+                    }
+                },
+            )
+        }
+        
         return new_post;
     }
 
