@@ -68,8 +68,13 @@ export class AuthService {
             isSecondFactorAuthenticated
         })
 
+        // return  {
+        //     expiresIn: process.env.EXPIRESIN,
+        //     accessToken,
+        // }
+
         return  {
-            expiresIn: process.env.EXPIRESIN,
+            expiresIn: 60,
             accessToken,
         }
     }

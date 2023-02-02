@@ -4,21 +4,18 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { AuthService } from './auth.service';
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy) {
+export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
 
     constructor(private readonly authService: AuthService) {
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-            ignoreExpiration: false,
             secretOrKey: process.env.SECRETKEY
         });
     }
     
-    async validate({ email }) {
-        console.log(email);
-        const user = await this.authService.validateUser(email);
-        console.log('user : ' , user);
-
+    async validate(payload : any) {
+        const user = await this.authService.validateUser(payload.email);
+        
         if (!user) {
             throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
         }

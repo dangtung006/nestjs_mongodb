@@ -23,23 +23,28 @@ import { JwtStrategy } from './jwt.strategy';
         ]),
         
         PassportModule,
+
         // PassportModule.register({
         //     defaultStrategy: 'jwt',
         //     property: 'user',
         //     session: false,
         // }),
 
-        JwtModule.registerAsync({
-            imports: [ConfigModule],
+        // JwtModule.registerAsync({
+        //     imports: [ConfigModule],
 
-            useFactory: async (configService: ConfigService) => ({
-                secret: configService.get('SECRETKEY'),
-                signOptions: {
-                    expiresIn: configService.get('EXPIRESIN'),
-                },
-            }),
+        //     useFactory: async (configService: ConfigService) => ({
+        //         secret: configService.get('SECRETKEY'),
+        //         signOptions: {
+        //             expiresIn: configService.get('EXPIRESIN'),
+        //         },
+        //     }),
 
-            inject: [ConfigService],
+        //     inject: [ConfigService],
+        // }),
+
+        JwtModule.register({
+            secret: process.env.SECRETKEY
         }),
     ],
 
