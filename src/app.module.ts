@@ -1,4 +1,8 @@
 import { Module } from '@nestjs/common';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter';
+
+
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PostModule } from './post/post.module';
@@ -7,6 +11,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { CategoryModule } from './category/category.module';
+import { join } from 'path';
 @Module({
     imports: [
         ConfigModule.forRoot({
@@ -21,6 +26,29 @@ import { CategoryModule } from './category/category.module';
         //     })
         // }),
 
+        MailerModule.forRoot({
+            transport : {
+                host : "smtp://user:password@smtp.gmail.com",
+                secure : false,
+                auth : {
+                    user: "user",
+                    pass: "password"
+                }
+            },
+
+            defaults : {
+                from : '"No Reply" <no-reply@localhost>',
+            },
+
+            template : {
+                dir: join(__dirname, 'src/templates/email'),
+                adapter: new EjsAdapter(),
+                options: {
+                    strict: true,
+                },
+            }
+        }),
+        
         MongooseModule.forRoot(process.env.MONGODB_URL, { retryAttempts : 10 }),
         PostModule,
         UserModule,
