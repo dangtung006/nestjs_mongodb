@@ -40,7 +40,7 @@ export class PostController {
     }
 
     @Get('get/category')
-    async getByCategory(@Query('category_id') category_id) {
+    async getByCategory(@Query('category_id') category_id: string) {
         return await this.postService.getByCategory(category_id);
     }
   
