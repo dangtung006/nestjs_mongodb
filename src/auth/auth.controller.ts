@@ -26,4 +26,9 @@ export class AuthController {
     getTest(@Req() req : Request){
         return req.user;
     }
+    
+    @Get('set/queue')
+    setTestQueu(){
+        return this.authService.testQueue()
+    }
 }

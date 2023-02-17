@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { BullModule } from '@nestjs/bull';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter';
 
@@ -48,7 +49,14 @@ import { join } from 'path';
                 },
             }
         }),
-        
+
+        BullModule.forRoot({
+            redis : {
+                host : "localhost",
+                port : 6379
+            }
+        }),
+
         MongooseModule.forRoot(process.env.MONGODB_URL, { retryAttempts : 10 }),
         PostModule,
         UserModule,

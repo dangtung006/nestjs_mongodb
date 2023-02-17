@@ -5,11 +5,15 @@ import * as bcrypt from 'bcrypt';
 import { UserService } from '../user/user.service';
 import { CreateUserDto, LoginUserDto } from '../user/user.dto';
 
+import { InjectQueue } from '@nestjs/bull';
+import { Queue } from 'bull';
+
 @Injectable()
 export class AuthService {
     constructor(
         @Inject('USER_SERVICE') private readonly userService : UserService,
-        private readonly jwtService : JwtService
+        private readonly jwtService : JwtService,
+        @InjectQueue('send-mail') private sendMail: Queue
     ){}
     
     async register(userDto: CreateUserDto) {
@@ -59,6 +63,19 @@ export class AuthService {
             throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
             
         return user;
+    }
+
+    async testQueue(){
+        await this.sendMail.add(
+            'register',
+            {
+              to: "dangtung",
+              name: "006",
+            },
+            {
+              removeOnComplete: true,
+            },
+        );
     }
 
     private async _generateToken({ email }, isSecondFactorAuthenticated = false, refresh = false,){

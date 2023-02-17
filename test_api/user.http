@@ -19,3 +19,6 @@ Content-Type: application/json
 ###
 GET http://localhost:3000/auth/test
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRhbmd0dW5nQGdtYWlsLmNvbSIsImlzU2Vjb25kRmFjdG9yQXV0aGVudGljYXRlZCI6ZmFsc2UsImlhdCI6MTY3NTMxMjYwNn0.lJ8UlXMb-P4OkyrA8T556KGTzx-9oofUqCmBPDvso2M
+
+###
+GET http://localhost:3000/auth/set/queue

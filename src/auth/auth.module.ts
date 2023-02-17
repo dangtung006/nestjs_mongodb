@@ -11,6 +11,10 @@ import { UserRepository } from '../user/user.repository';
 import { UserSchema } from '../user/user.model';
 import { JwtStrategy } from './jwt.strategy';
 
+import { BullModule } from '@nestjs/bull';
+import { EmailConsumer } from 'src/auth/consumer';
+
+
 
 @Module({ 
     imports: [
@@ -46,6 +50,10 @@ import { JwtStrategy } from './jwt.strategy';
         JwtModule.register({
             secret: process.env.SECRETKEY
         }),
+
+        BullModule.registerQueue({
+            name: 'send-mail',
+        }),
     ],
 
     controllers: [AuthController],
@@ -57,7 +65,8 @@ import { JwtStrategy } from './jwt.strategy';
             useClass : UserService
         },
         JwtStrategy,
-        UserRepository
+        UserRepository,
+        EmailConsumer
     ]
 })
 
