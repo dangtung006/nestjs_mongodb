@@ -30,3 +30,10 @@ GET http://localhost:3000/post/63db77b90fcbd7c525830782
 
 ###
 DELETE  http://localhost:3000/post/63da1d44d97afd38fee17c2e
+
+
+###
+GET  http://localhost:3000/post/cache/set-cache
+
+###
+GET  http://localhost:3000/post/cache/get-cache

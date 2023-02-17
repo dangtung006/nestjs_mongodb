@@ -8,9 +8,6 @@ import { PostRepository } from './post.repository';
 import { CategoryRepository } from '../category/category.repository';
 import { CategorySchema } from '../category/category.model';
 import { redisStore } from 'cache-manager-redis-store';
-// import type { RedisClientType } from 'redis';
-
-
 
 @Module({
     imports: [
@@ -26,19 +23,19 @@ import { redisStore } from 'cache-manager-redis-store';
             },
         ]),
 
-        // CacheModule.registerAsync<any>({
-        //     isGlobal: true,
-        //     useFactory: async () => {
-        //         const store = await redisStore({
-        //             socket: { host: "localhost", port: 6379 },
-        //             ttl: 60,
-        //         });
+        CacheModule.registerAsync<any>({
+            isGlobal: true,
+            useFactory: async () => {
+                const store = await redisStore({
+                    socket: { host: "localhost", port: 6379 },
+                    ttl: 30,// seconds
+                });
 
-        //         return {
-        //             store: () => store,
-        //         };
-        //     },
-        // }),  
+                return {
+                    store: () => store,
+                };
+            },
+        }),  
     ],
 
     controllers: [PostController],

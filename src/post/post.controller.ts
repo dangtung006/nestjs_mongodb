@@ -9,11 +9,15 @@ import {
     Post, 
     Delete, 
     UseGuards ,
-    NotFoundException
+    NotFoundException,
+    CACHE_MANAGER,
+    Inject
 } from '@nestjs/common';
 
 import { PostService } from './post.service';
 import { AuthGuard } from '@nestjs/passport';
+import { Cache } from 'cache-manager';
+
 
 import {
     CreatePostDto,
@@ -25,6 +29,7 @@ import {
 export class PostController {
     constructor(
         private readonly postService: PostService,
+        @Inject(CACHE_MANAGER) private cacheManager: Cache,
     ) {}
 
     @UseGuards(AuthGuard('jwt'))
@@ -65,5 +70,21 @@ export class PostController {
     async deletePost(@Param('id') id: string) {
         await this.postService.deletePost(id);
         return 1;
+    }
+
+    @Get('cache/set-cache')
+    async demoSetCache() {
+        try{
+            await this.cacheManager.set('dangtung', 'testqqqq');
+            return 1;
+        }catch(e){
+            console.log("errr : " , e);
+        }
+
+    }
+
+    @Get('cache/get-cache')
+    async demoGetCache() {
+      return this.cacheManager.get('dangtung');
     }
 }
